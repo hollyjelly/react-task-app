@@ -1,4 +1,5 @@
-import React, {ChangeEvent, useState} from 'react'
+import { useState } from 'react'
+import type { ChangeEvent } from 'react'
 import {FiX} from "react-icons/fi";
 import {useTypedDispatch, useTypedSelector} from "../../hooks/redux.ts";
 import {deleteTask, setModalActive, updateTask} from "../../store/slices/boardsSlice.ts";
@@ -70,7 +71,7 @@ const EditModal = () => {
             deleteTask({
                 boardId: editingState.boardId,
                 listId: editingState.listId,
-                taskId: editingState.taskId
+                taskId: editingState.task.taskId
             })
         )
 

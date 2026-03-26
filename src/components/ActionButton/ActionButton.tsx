@@ -1,4 +1,5 @@
-import React, {FC, useState} from 'react'
+import { useState } from 'react'
+import type { FC } from 'react'
 import DropDownForm from "./DropDownForm/DropDownForm.tsx";
 import {IoIosAdd} from "react-icons/io";
 import {listButton, taskButton} from "./ActionButton.css.ts";

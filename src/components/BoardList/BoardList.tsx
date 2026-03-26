@@ -1,4 +1,5 @@
-import React, {FC, useRef, useState} from 'react'
+import { useState } from 'react'
+import type { FC } from 'react'
 import {useTypedDispatch, useTypedSelector} from "../../hooks/redux.ts";
 import SideForm from "../SideForm/SideForm.tsx";
 import {FiLogIn, FiPlusCircle} from "react-icons/fi";
@@ -12,7 +13,7 @@ import {useAuth} from "../../hooks/useAuth.ts";
 
 type TBoardListProps = {
     activeBoardId: string;
-    setActiveBoardId: React.Dispatch<React.SetStateAction<string>>;
+    setActiveBoardId: (value: string) => void;
 }
 
 const BoardList: FC<TBoardListProps> = ({
@@ -23,7 +24,6 @@ const BoardList: FC<TBoardListProps> = ({
     const dispatch = useTypedDispatch()
     const {boardArray} = useTypedSelector(state => state.boards)
     const [isFormOpen, setIsFormOpen] = useState(false)
-    const inputRef = useRef<HTMLInputElement>(null)
     const auth = getAuth(app)
     const provider = new GoogleAuthProvider()
     const {isAuth} = useAuth()
@@ -72,7 +72,7 @@ const BoardList: FC<TBoardListProps> = ({
                 },
                     {
                         [boardItem]:
-                        boardArray.findIndex(b => b.board === activeBoardId) !== index
+                        boardArray.findIndex(b => b.boardId === activeBoardId) !== index
                     }
                 )}>
                     <div >

@@ -30,9 +30,9 @@ const modalSlice = createSlice({
     initialState,
     reducers: {
         setModalData: ((state, {payload}: PayloadAction<TSetModalDataAction>) => {
-            state.boardId = payload
+            state.boardId = payload.boardId
             state.listId= payload.listId
-            state.taks = payload.task
+            state.task = payload.task
         })
     }
 })

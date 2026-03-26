@@ -1,4 +1,4 @@
-import React, {FC} from 'react'
+import type { FC } from 'react'
 import {useTypedSelector} from "../../hooks/redux.ts";
 import {FiX} from "react-icons/fi";
 import LogItem from "./LogItem/LogItem.tsx";
@@ -19,7 +19,7 @@ const LogerModal:FC<TLoggerModalProps> = ({setIsLoggerOpen}) => {
                     <FiX className={closeButton} onClick={() => setIsLoggerOpen(false)}/>
                 </div>
                 <div className={body}>
-                    {logs.map((log, index) => (
+                    {logs.map((log) => (
                         <LogItem key={log.logId} logItem={log}/>
                     ))}
                 </div>

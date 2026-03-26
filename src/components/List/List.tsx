@@ -1,4 +1,3 @@
-import React from 'react'
 import {GrSubtract} from "react-icons/gr";
 import Task from "../Task/Task.tsx";
 import ActionButton from "../ActionButton/ActionButton.tsx";
@@ -8,15 +7,15 @@ import {deleteList, setModalActive} from "../../store/slices/boardsSlice.ts";
 import {addLog} from "../../store/slices/loggerSlice.ts";
 import {v4 as uuidv4} from 'uuid';
 import {setModalData} from "../../store/slices/modalSlice.ts";
-import {deleteButton, header, listWrapper} from "./List.css.ts";
+import {deleteButton, header, listWrapper, name} from "./List.css.ts";
 import {Droppable} from "@hello-pangea/dnd";
 
 type TListProps = {
     boardId: string;
-    list: IList[];
+    list: IList;
 }
 
-const List = ({list, boardId}) => {
+const List = ({list, boardId}: TListProps) => {
     const dispatch = useTypedDispatch()
 
     const handleListDelete = (listId: string) => {
@@ -31,8 +30,8 @@ const List = ({list, boardId}) => {
         )
     }
 
-    const handleTaskChange = (boardId: string, listId: string, taskId: string, task: ITask) => {
-        dispatch(setModalData({boardId, listId, taskId}))
+    const handleTaskChange = (boardId: string, listId: string, task: ITask) => {
+        dispatch(setModalData({boardId, listId, task}))
         dispatch(setModalActive(true))
     }
 
@@ -47,13 +46,13 @@ const List = ({list, boardId}) => {
                         <div className={name}>{list.listName}</div>
                         <GrSubtract
                             className={deleteButton}
-                            onClick={() => handleListDelete}
+                            onClick={() => handleListDelete(list.listId)}
                         />
                     </div>
                     {list.tasks.map((task, index) => (
                         <div
                             key={task.taskId}
-                            onClick={() => handleTaskChange(boardId, list.listId, task.taskId, task)}
+                            onClick={() => handleTaskChange(boardId, list.listId, task)}
                         >
                             <Task
                                 taskName={task.taskName}

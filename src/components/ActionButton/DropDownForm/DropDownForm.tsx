@@ -1,4 +1,5 @@
-import React, {ChangeEvent, FC, useState} from 'react'
+import { useState } from 'react'
+import type { ChangeEvent, FC } from 'react'
 import {FiX} from "react-icons/fi";
 import {useTypedDispatch} from "../../../hooks/redux.ts";
 import {addList, addTask} from "../../../store/slices/boardsSlice.ts";
@@ -9,7 +10,7 @@ import {button, buttons, close, input, listForm, taskForm} from "./DropDownForm.
 type TDropDownFormProps = {
     boardId: string;
     listId: string;
-    setIsFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    setIsFormOpen: (value: boolean) => void;
     list?: boolean
 }
 
@@ -74,7 +75,7 @@ const DropDownForm: FC<TDropDownFormProps> = ({boardId, list, listId, setIsFormO
                 value={text}
                 autoFocus
                 onChange={handleTextChange}
-                placeholer={formPlaceholder}
+                placeholder={formPlaceholder}
             />
             <div className={buttons}>
                 <button
@@ -82,7 +83,7 @@ const DropDownForm: FC<TDropDownFormProps> = ({boardId, list, listId, setIsFormO
                     onMouseDown={handleButtonClick}>
                     {buttonTitle}
                 </button>
-                <FiX className={close}/>
+                <FiX className={close} onMouseDown={() => setIsFormOpen(false)}/>
             </div>
         </div>
     )
